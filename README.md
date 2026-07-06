@@ -1,4 +1,5 @@
 Automation & Cypress Fundamentals Research & Practice
+
 PART A: Test Structure
 describe()
 Purpose: Group related tests together into a single block or suite.
