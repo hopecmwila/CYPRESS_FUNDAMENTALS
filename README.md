@@ -1,6 +1,7 @@
 Automation & Cypress Fundamentals Research & Practice
 
 PART A: Test Structure
+
 describe()
 Purpose: Group related tests together into a single block or suite.
 Syntax: describe('Description of the suite', () => { /* tests go here */ });
@@ -56,6 +57,7 @@ afterEach(() => {
 Real-World Use Case: Taking a screenshot of the application if a test fails so the QA team can see what went wrong.
 
 PART B: Assertions
+
 The difference between assertions is that expect() is a function call, you pass the actual value into the function as a parameter and it reads like a statement. While should() is a property extension, it attaches itself directly to the object you are testing and it reads like a natural English sentence.
 
 Use expect() when:
@@ -132,6 +134,7 @@ cy.get('body').type('{enter}')
 
 
 PART D: Locators
+
 cy.get()
 Searches the entire webpage for elements that match the given CSS selector.
 Example: 
@@ -189,6 +192,7 @@ Why are long CSS selectors discouraged?
 Long, deeply nested selectors (like div > ul > li > span > button) are highly discouraged because they are too fragile and break easily. If a developer alters the webpage layout by adding or removing even a single element in that long chain, the selector fails instantly, forcing the QA team to waste time constantly fixing broken tests.
 
 PART E: Assertions Practice
+
 be.visible 
   cy.get('[data-cy="success-alert"]').should('be.visible');
 exist 
@@ -211,6 +215,7 @@ have.attr
   cy.get('[data-cy="profile-link"]').should('have.attr', 'href', '/profile');
 
 PART F: Working with Elements
+
 Buttons
 cy.get('[data-cy="submit-button"]')
   .click()
@@ -256,7 +261,9 @@ Images
 cy.get('[data-cy="company-logo"]')
   .should('be.visible')
   .and('have.attr', 'src', '/assets/logo.png');
+
 PART G: Waiting
+
 Why is cy.wait(5000) considered bad practice?
 Using delays like cy.wait(5000) is a bad practice because it is a hardcoded delay which makes the test slow and unreliable. If a test is delayed, it drags the overall run time because your test will instantly fail even though the application is working perfectly.
 
@@ -271,6 +278,7 @@ Waiting for Page Loading
 Instead of pausing for the page load event, wait for a specific visual anchor to appear on the screen that proves the page has fully loaded.
 
 PART H: Forms
+
 describe('User Registration Form', () => {
   beforeEach(() => {
     // 1. Visit the registration page before every test
@@ -281,31 +289,31 @@ describe('User Registration Form', () => {
     // 2. Intercept the form submission API request to wait for it later
     cy.intercept('POST', '/api/v1/register').as('registrationSubmit');
 
-    // 3. Fill out Text Fields (First Name, Last Name, Email, Password)
+   // 3. Fill out Text Fields (First Name, Last Name, Email, Password)
     cy.get('[data-cy="first-name-input"]').type('John');
     cy.get('[data-cy="last-name-input"]').type('Doe');
     cy.get('[data-cy="email-input"]').type('john.doe@example.com');
     cy.get('[data-cy="password-input"]').type('SecurePass123!', { log: false });
 
-    // 4. Fill out the Date Picker (Types the date string directly)
+   // 4. Fill out the Date Picker (Types the date string directly)
     cy.get('[data-cy="birth-date-picker"]').type('1995-08-15');
 
-    // 5. Select from Dropdown (Select by visible text)
+   // 5. Select from Dropdown (Select by visible text)
     cy.get('[data-cy="country-dropdown"]').select('Kenya');
 
-    // 6. Check the Checkbox (Ticks the terms and conditions)
+   // 6. Check the Checkbox (Ticks the terms and conditions)
     cy.get('[data-cy="terms-checkbox"]').check();
 
-    // 7. Choose a Radio Button (Selects the subscription plan)
+   // 7. Choose a Radio Button (Selects the subscription plan)
     cy.get('[data-cy="premium-plan-radio"]').check();
 
-    // 8. Click the Submit Button
+   // 8. Click the Submit Button
     cy.get('[data-cy="submit-form-btn"]').click();
 
-    // 9. Dynamically wait for the backend API request to finish successfully
+   // 9. Dynamically wait for the backend API request to finish successfully
     cy.wait('@registrationSubmit').its('response.statusCode').should('eq', 200);
 
-    // 10. Verify submission success visually on the UI
+   // 10. Verify submission success visually on the UI
     cy.get('[data-cy="success-message"]')
       .should('be.visible')
       .and('contain.text', 'Thank you for registering!');
@@ -313,7 +321,9 @@ describe('User Registration Form', () => {
   });
 });
 
+
 PART I: Tables
+
 describe('Web Table Automation Practice', () => {
 
   beforeEach(() => {
@@ -375,7 +385,9 @@ describe('Web Table Automation Practice', () => {
 
 });
 
+
 PART J: Browser Interactions
+
 Browser Back; Moves one page back in the browser's history log.
 cy.go('back'); 
 cy.go(-1); 
@@ -443,7 +455,9 @@ it('should feed test input text into a browser prompt dialog', () => {
   cy.get('[data-cy="result-message"]').should('contain', 'Nairobi, Kenya');
 });
 
+
 PART K: Keyboard Actions
+
 1. Enter - Submit a form or select a highlighted item
 cy.get('[data-cy="search-input"]').type('Cypress Testing{enter}');
 
@@ -470,6 +484,7 @@ cy.get('[data-cy="promo-code-input"]').type('{del}');
 
 9. Backspace - Erase the character immediately to the left of the text cursor
 cy.get('[data-cy="username-field"]').type('{backspace}');
+
 
 PART L: Scrolling
 describe('Cypress Scrolling Operations', () => {
