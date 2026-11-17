@@ -1,4 +1,4 @@
-# Automation & Cypress Fundamentals: Research & Practice 🚀
+# Automation & Cypress Fundamentals: Research & Practice
 
 A comprehensive reference guide and practice repository for mastering test automation fundamentals using **Cypress**. This document covers everything from basic test structure to advanced browser interactions, complete with real-world examples and best practices.
 
